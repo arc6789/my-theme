@@ -1,0 +1,299 @@
+<!doctype html>
+
+<!--
+    =======
+    Theme:  Simple Harmony 2.1 – A simple, clean and minimal HTML5 Tumblr Theme
+    Author: Michael Xander – www.michaelxander.de
+    =======
+
+    Version 2.0
+    - Optional Infinite Scroll
+    - Fully customizable colors
+
+    Inspirations:
+    - My own Wordpress Theme >> www.michaelxander.de/blog/
+    - The Minimalist v1. Theme
+-->
+        
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{Title}</title>
+    {block:Description}
+        <meta name="description" content="{MetaDescription}" />
+    {/block:Description}    
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    <link rel="stylesheet" href="http://static.tumblr.com/2ijpir3/7syltim6x/style.css">
+    
+    <!-- Custom Colors and Fonts -->
+    <meta name="color:Background" content="#ffffff"/>
+    <meta name="color:Header Text" content="#000000"/>
+    <meta name="color:Description Text" content="#888888"/>
+    <meta name="color:Navi Links" content="#888888"/>
+    <meta name="color:Navi Hover" content="#ffffff"/>
+    <meta name="color:Navi Hover Background" content="#3b9d9d"/>
+    <meta name="color:Content Text" content="#333333"/>
+    <meta name="color:Content Links" content="#3b9d9d"/>
+    <meta name="color:Content Links Hover" content="#888888"/>
+    <meta name="color:Horizontal Line" content="#e7e7e7"/>
+    <meta name="font:Header" content="Georgia, 'Bitstream Charter', serif"/>
+    <meta name="font:Description" content="Georgia, 'Bitstream Charter', serif"/>
+    <meta name="font:Content" content="Georgia, 'Bitstream Charter', serif"/>
+    <style type="text/css">
+        body { background-color: {color:Background}; margin: 0; font-size: 14px; line-height: 1.5; border-top: 6px solid {color:Horizontal Line}; }
+        body, button, input, select, textarea { font: 16px {font:Content}; color: {color: Content Text}; line-height: 1.6; }
+        #header { 
+            color: {color:Header Text};
+            font: 24px {font:Header}; 
+            text-align: center;
+            margin-top: 60px;
+        }
+        #description { 
+            color: {color:Description Text}; 
+            font: 18px {font:Description};
+            margin-top: 15px;
+        }
+        a:link, a:visited {
+            color: {color:Content Links};   
+        }
+        a:active, a:hover {
+            color: {color:Content Links Hover}; 
+        }
+        #topNav a:link, #topNav a:visited {
+            padding: 0 5px 0 5px;
+            font-size: 14px;
+            line-height: 14px;
+            text-decoration: none;
+            color: {color:Navi Links};
+            text-transform: Uppercase;
+        }
+        #topNav a:hover, #topNav a:active {
+            outline: none;
+            text-decoration: none;
+            color: {color:Navi Hover};
+            background-color: {color:Navi Hover Background};
+        }
+        #pageNav a:link, #pageNav a:visited {
+            padding: 5px;
+            font-size: 12px;
+            line-height: 12px;
+            text-decoration: none;
+            color: {color:Navi Links};
+        }
+        #pageNav a:hover, #pageNav a:active {
+            outline: none;
+            text-decoration: none;
+            color: {color:Navi Hover};
+            background-color: {color:Navi Hover Background};
+        }
+        #footer {
+            text-align: center; 
+            color: {color:Navi Links};
+            font-size: 12px;
+        }
+        #footer a:link, #footer a:visited { color: {color:Navi Links}; }
+        #footer a:hover, #footer a:active { color: {color:Navi Hover Background}; }
+        hr {
+            background-color: {color:Horizontal Line};
+            border: 0;
+            clear: both;
+            height: 1px;
+        }
+        #searchForm {
+            margin-top: 20px;
+            margin-right: 0;
+            float: right;
+            background-color: {color:Background};
+            border: none;
+            padding: 0px;
+        }
+        #searchField {
+            font-size: 12px;
+            color: {color:Description Text};
+            background-color: {color:Background}; 
+            outline: 0px;
+            border: none;
+            border-bottom: 1px dotted {color:Horizontal Line};
+        }  
+        #searchField:hover {
+            background-color: {color:Horizontal Line};
+        }   
+        #posts h3, #posts h3 a:link, #posts h3 a:visited {
+            font-size: 22px;
+            color: {color:Header Text};
+            padding-bottom: 4px;
+        }
+        #posts h3 a:hover, #posts h3 a:active {
+            color: {color:Navi Links};
+        }
+        .postDate {
+            color: {color:Navi Links};
+            font-size: 12px;
+            line-height: 1;
+            margin: 14px 0 60px 0;
+        }
+        .postDate a:link, .postDate a:visited { color: {color:Navi Links}; }
+        .postDate a:hover, .postDate a:active { color: {color:Navi Hover Background}; }
+    </style>
+
+    <!-- Custom CSS -->
+    <style type="text/css">
+        {CustomCSS}
+    </style>
+
+    <!-- Theme Options -->
+    <meta name="if:Display search field" content="1"/>
+    <meta name="if:Infinite scroll" content="0"/>
+</head>
+
+<body>
+<div id="searchForm">
+{block:IfDisplaySearchField}
+    <form action="/search" method="get">
+        <input id="searchField" type="text" name="q" value="{SearchQuery}"/>
+        <input id="searchSubmit" type="submit" value=""/>
+    </form>
+{/block:IfDisplaySearchField}
+</div>
+  
+<div id="container">  
+    <header id="header">
+        <h1><a href="/">{Title}</a></h1>
+        {block:Description}
+            <h3 id="description">{Description}</h3>
+        {/block:Description}
+    </header>
+    
+    <nav id="topNav">
+        <hr>
+        <ul>
+        {block:HasPages}
+        {block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}
+        {/block:HasPages}
+        {block:AskEnabled}<li><a href="/ask">Ask</a></li>{/block:AskEnabled}
+        {block:SubmissionsEnabled}<li><a href="/submit">Submit</a></li>{/block:SubmissionsEnabled}                 
+        <li><a href="/archive">Archive</a></li>
+        <li><a href="/random">Random</a></li>
+        <li><a href="{RSS}">RSS</a></li>
+        </ul>
+        <hr>
+    </nav> 
+    
+{block:SearchPage}
+    <article>
+        <div>
+            <div class="searchPage">
+                 <h2>Search results for <a href="{URLSafeSearchQuery}">{SearchQuery}</a></h2>
+            </div>
+            {block:NoSearchResults}
+                <div class="searchPageText">
+                    <p>I’m sorry, but we couldn't find anything matching "<b>{SearchQuery}</b>".</p>
+                </div>
+            {/block:NoSearchResults}
+        </div>
+    </article>
+{/block:SearchPage}
+
+<div class="autopagerize_page_element"> <!-- Infinite Scroll -->  
+{block:Posts}
+    <article>
+        <div id="posts">
+            {block:Text}
+                {block:Title}<h3><a href="{Permalink}">{Title}</a></h3>{/block:Title}
+                {Body}
+            {/block:Text}
+
+            {block:Photo}
+                {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}
+                {block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+            {/block:Photo}
+                
+            {block:Photoset}
+                {Photoset-500}
+                {block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+            {/block:Photoset}
+            
+            {block:Quote}
+                "{Quote}"
+                {block:Source}<div class="source">– {Source}</div>{/block:Source}
+            {/block:Quote}
+
+            {block:Link}
+                <h3><a href="{URL}" class="link" {Target}>{Name}</a></h3>
+                {block:Description}<div class="description">{Description}</div>{/block:Description}
+            {/block:Link}
+
+            {block:Chat}
+                {block:Title}<h3><a href="{Permalink}">{Title}</a></h3>{/block:Title}
+                <ul class="chat">
+                    {block:Lines}
+                        <li class="{Alt} user_{UserNumber}">
+                            {block:Label}<em>{Label}</em>{/block:Label}
+                            {Line}
+                        </li>
+                    {/block:Lines}
+                </ul>
+            {/block:Chat}
+
+            {block:Video}
+                {Video-500}
+                {block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+            {/block:Video}
+
+            {block:Audio}
+                {AudioPlayerWhite}
+                {block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+            {/block:Audio}
+                
+            <div class="postDate">
+                {block:Date}
+                    <a href="{Permalink}">{DayOfMOnth}{DayOfMonthSuffix} {ShortMonth} {Year}</a>
+                {/block:Date}
+                {block:NoteCount} | 
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                {/block:NoteCount}
+            </div>
+        </div>
+    </article>
+{/block:Posts} 
+</div>  <!-- Infinite Scroll --> 
+
+{block:IfNotInfiniteScroll}
+           
+{block:PermalinkPagination}
+    <nav id="pageNav">
+        <ul>
+            {block:PreviousPost}<li><a href="{PreviousPost}" id="pageNavNewer">Previous</a></li>{/block:PreviousPost}
+            {block:NextPost}<li><a href="{NextPost}" id="pageNavOlder">Next</a></li>{/block:NextPost}  
+        </ul>
+    </nav>
+{/block:PermalinkPagination}
+      
+{block:Pagination}
+    <nav id="pageNav">
+        <ul>
+            {block:PreviousPage}<li><a href="{PreviousPage}" id="pageNavNewer">Newer</a></li>{/block:PreviousPage} 
+            {block:JumpPagination length="5"}
+            {block:CurrentPage}<li><a href="{URL}" class="active">{PageNumber}</a></li>{/block:CurrentPage}
+            {block:JumpPage}<li><a href="{URL}">{PageNumber}</a></li>{/block:JumpPage}
+            {/block:JumpPagination}
+            {block:NextPage}<li><a href="{NextPage}" id="pageNavOlder">Older</a></li>{/block:NextPage} 
+        </ul>
+    </nav>
+{/block:Pagination} 
+
+{/block:IfNotInfiniteScroll} 
+     
+    <footer id="footer">
+        <p>Theme <strong><a href="http://michaelxander.de/free/simple-harmony/">Simple Harmony</a></strong> designed by <strong><a href="http://michaelxander.de">Michael Xander</a></strong></p>
+    </footer>
+</div>
+
+<!-- Theme Options -->
+{block:IfInfiniteScroll}
+    <script type="text/javascript" src="http://static.tumblr.com/2ijpir3/754ltiifo/tumblrautopager.js"></script>
+{/block:IfInfiniteScroll}
+  
+</body>
+</html>
