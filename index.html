@@ -1,48 +1,120 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>{Title}</title>
+    <title>{Title}</title>
 
-	<!-- Custom Colors and Fonts -->
-    <meta name="color:Background" content="#ffffff"/>
-    <meta name="color:Header Text" content="#000000"/>
-    <meta name="color:Description Text" content="#888888"/>
-    <meta name="color:Navi Links" content="#888888"/>
+    <!-- Custom Colors and Fonts -->
+    <meta name="color:Background" content="#E7D6D6"/>
+    <meta name="color:Header Background Color" content="#D49E9E">
+    <meta name="color:Header Text" content="#FFFFFF"/>
+    <meta name="color:Description Text" content="#000000"/>
+    <meta name="color:Navi Links" content="#529ecc"/>
     <meta name="color:Navi Hover" content="#ffffff"/>
     <meta name="color:Navi Hover Background" content="#3b9d9d"/>
+     <meta name="color:Background Post Color" content="#ffffff"/>
     <meta name="color:Content Text" content="#333333"/>
     <meta name="color:Content Links" content="#3b9d9d"/>
     <meta name="color:Content Links Hover" content="#888888"/>
     <meta name="color:Horizontal Line" content="#e7e7e7"/>
+    <meta name="color:Footer Color" content="#000000"/>
     <meta name="font:Header" content="Georgia, 'Bitstream Charter', serif"/>
     <meta name="font:Description" content="Georgia, 'Bitstream Charter', serif"/>
+    
+    <meta name="font:Navigation" content="Georgia, 'Bitstream Charter', serif"/>
+    
     <meta name="font:Content" content="Georgia, 'Bitstream Charter', serif"/>
-	
-	<style type="text/css">
-	body{background: {color:Background} url('{image:Background}') repeat; font-family: {font:Body}; }
-	
-	header{background:{color:}}
-	.thisis{padding-bottom:20px;margin-top:0;}
-	nav li{display: inline; padding-right:20px;}
-	nav ul{margin:10px auto}
-	
+    
+    <meta name="select:Avatar style" content="square" title="Square">
+    <meta name="select:Avatar style" content="circle" title="Circle">
+    <meta name="select:Avatar style" content="hidden" title="Hidden">
 
-	</style>
+    <link href='http://fonts.googleapis.com/css?family=Cabin|Gloria+Hallelujah|Coming+Soon|Architects+Daughter|Dancing+Script|Indie+Flower' rel='stylesheet' type='text/css'>
+  
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    
+    
+    <style type="text/css">
+    body{background: {color:Background} url('{image:Background}') repeat; font-family: {font:Body}; }
+    
+    header{background: {color:Header Background Color}; color:{color:Header Text};max-width:100%;}
+    .headerclass{padding-bottom:20px;margin-top:0;border-bottom:2px dotted black;}
+    
+    .headerclass a {}
+    
+    .headerclass h1{color:{color:Header Text}; font-family:'Indie Flower', cursive; font-size:55px; font-weight:bold;}
+    
+    .headerclass p{color:{color:Description Text}; font-family:{font:Description};text-align:center; font-size:17px; font-weight:bold;} /*font-family: 'Cabin', sans-serif; text-align:center;*/
+    .avatarr{margin-left:auto; margin-right:auto;}
+    
+    .headerclass img{masthead {select:Avatar style}; border:1px solid white;}
+    .headerclass img:hover{opacity:0.8}
+    
+    nav li{display: inline; padding-right:20px; font-family:{font:Navigation};}
+    
+    nav li a {color:{color:Navi Links}; text-decoration:none;}
+    
+    nav li a:hover, .headerclass a:hover {
+    text-decoration: none;
+}
+    
+    nav ul{margin:10px auto}
+    
+    .each-post{background:{color:Background Post Color}; box-shadow:0px 3px 15px rgba(0,0,0,0.1)}
+    
+    .each-post:hover{opacity:0.7}
+    
+.square img {
+    border-radius: 0;
+}
+
+.circle img {
+    border-radius: 50%;
+}
+
+.hidden img {
+    display: none;
+}
+
+.page{padding:5px;}
+
+
+
+.buttons ul li{display:inline; float:left;}
+
+.buttons ul li{margin:0; padding:0 10px;}
+
+.date a:hover{font-style:italic; font:{font:Navigation}; text-decoration:none;}
+
+.notesclass ol{list-style-type:none; margin-top:7px; padding-left:0;}
+
+.notesclass{text-align:left}
+#bquote{border-left:0;}
+.photoclass img, .photosetclass img{width:100%; max-width:100%;}
+    </style>
 </head>
 <body>
-	<header>
-	
-        <div class="thisis">
-		<h1>{Title}</h1>
-		{block:Description}
-		<p>{Description}</p>
-		{/block:Description}
-		</div>
-	</header>
+<!--<div class="container-fluid">-->
+<!--<div class="row">-->
+<!--    <div class="col-lg-8">-->
+    <header>
+    
+        <div class="headerclass" style="padding-top:40px">
+        <div style="text-align:center;" class="masthead {select:Avatar style}">
+        <a href="/"><img class="{Avatar style} avatarr" src="{PortraitURL-96}"></a>
+        </div>
+        <a href="/"><h1 class="text-center">{Title}</h1></a>
+       {block:Description}
+        <div style="padding: 0px 110px"><p class="{Description}">{Description}</p> </div>
+        {/block:Description}
+        </div>
+    </header>
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
 
-
-	<nav>
-    <ul>
+    <nav class="navclass" style="text-align:center">
+    <ul style="padding: 10px 40px;">
         {block:HasPages}
         {block:Pages}
         <li> <a href="{URL}">{Label}</a></li>
@@ -54,79 +126,92 @@
         {block:AskEnabled}
         <li> <a href="/ask">{AskLabel}</a></li>
         {/block:AskEnabled}
+        <li> <a href="/archive">Archive</a></li>
     </ul>
     </nav>
 
-	<section>
-		
-			{block:Posts}
-			<article>
-			
-			
-				{block:Text}
-				<div class="textclass">
-					<h2><a href="{Permalink}">{Title}</a></h2>
-					<p>{Body}</p>
-				</div>
-				{/block:Text}
-				
+    <section style="width:500px; margin-left:auto; margin-right:auto;"> <!--text-align:cenetr-->
+        
+            {block:Posts}
+            <article class="each-post" style="margin:auto; padding:20px;margin-top:50px;border:4px solid white}">     
+            
+            
+                <div style="width:400px; margin:auto"> <!--this change!!!!-->
+            
+            
+                {block:Text}
+                <div class="textclass">
+                    <h2><a href="{Permalink}">{Title}</a></h2>
+                    <p>{Body}</p>
+                </div>
+                
+                
+                {/block:Text}
+                
 
-				{block:Photo}
-					{LinkOpenTag}<img src="{PhotoURL-400}" alt="{PhotoAlt}" />{LinkCloseTag}
-                	{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+                {block:Photo}
+                <div class="photoclass">
+                    {LinkOpenTag}<img src="{PhotoURL-400}" width="{PhotoWidth-400}" alt="{PhotoAlt}" />{LinkCloseTag}
+                    {block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+                
+                </div>
                 {/block:Photo}
-				
+                
 
-				{block:Photoset}
+                {block:Photoset}
+                <div class="photosetclass">
                     {block:Photos}
-                        <img src="{PhotoURL-500}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" />
+                       {LinkOpenTag} <img src="{PhotoURL-400}" width="{PhotoWidth-400}"/> {LinkCloseTag}
                         {block:Caption}{Caption}{/block:Caption}
                         {block:Exif}
                             <ul>...</ul>
                         {/block:Exif}
                     {/block:Photos}
                     {block:Caption}{Caption}{/block:Caption}
+                </div>
                 {/block:Photoset}
-			
-				
-				{block:Quote}
-					<div class="quoteclass"></div>
-						<blockquote>"{Quote}"</blockquote>
-						{block:Source}
-						<cite>{Source}</cite>
-						{/block:Source}
-					</div>
-				{/block:Quote}
-				
-				
-				{block:Link}
-    				<div class="linkclass">
-    				<h1><a href="{URL}" target="_blank">{NAME}</a></h1>
-    				{block:Description}
-    				<p>{Description}</p>
-    				{/block:Description}
-    				{block:Excerpt}
-    				<p>{Excerpt}</p>
-    				{/block:Excerpt}
-    				{block:Author}
-    				<p>{Author}</p>
-    				{/block:Author}
-    				</div>
-				{/block:Link}
+            
+                
+                {block:Quote}
+                    <div class="quoteclass">
+                        <blockquote id="bquote">"{Quote}"</blockquote>
+                        {block:Source}
+                        <cite>{Source}</cite>
+                        {/block:Source}
+                    </div>
+                {/block:Quote}
+                
+                
+                {block:Link}
+                    <div class="linkclass">
+                    <h1><a href="{URL}" target="_blank">{NAME}</a></h1>
+                    {block:Description}
+                    <p>{Description}</p>
+                    {/block:Description}
+                    {block:Excerpt}
+                    <p>{Excerpt}</p>
+                    {/block:Excerpt}
+                    {block:Author}
+                    <p>{Author}</p>
+                    {/block:Author}
+                    </div>
+                    
+                {/block:Link}
 
 
-				{block:Chat}
-				    {block:Title}<h3>{Title}</h3>{/block:Title}
-				    {block:Lines}
-				       <p>{block:Label}
-    				    <strong> {Label} </strong>
-    				    {/block:Label}
-    				    {Line}</p>
-    				{/block:Lines}
-				{/block:Chat}
-				
-				
-				{block:Audio}
+                {block:Chat}
+                    {block:Title}<h3>{Title}</h3>{/block:Title}
+                    {block:Lines}
+                       <p>{block:Label}
+                        <strong> {Label} </strong>
+                        {/block:Label}
+                        {Line}</p>
+                    {/block:Lines}
+                    --quote
+                {/block:Chat}
+                
+                
+                {block:Audio}
                     <div class="audio inner">
                     {block:TrackName}
                         <h1 class="title"><a href="{Permalink}">{TrackName}</a></h1>
@@ -137,48 +222,85 @@
                     {AudioPlayerBlack}
                     {block:Caption}{Caption}{/block:Caption}
                 {/block:Audio}
-			
+            
 
-				{block:Video}
-    				{Video-500}
-    				{block:Caption}
-    				<p>{Caption}</p>
-    				{/block:Caption}
-				{/block:Video}
-				
+                {block:Video}
+                <div class="videoclass" style="width:inherit;margin-left:auto; margin-right:auto">
+                    {Video-400}
+                    {block:Caption}
+                    <p>{Caption}</p>
+                    {/block:Caption}
+                </div>
+                {/block:Video}
+                
+                
+                {block:Answer}
+                            <div class="question"><div class="asker">{Asker}</div><div class="asker-question">{Question}</div><img class="asker-avatar" src="{AskerPortraitURL-96}" alt=""></div>
+                        {block:Answerer}
+                            <div class="answer"><div class="answerer">{Answerer}</div><div class="answerer-answer">{Answer}</div><img class="answerer-avatar" src="{AnswererPortraitURL-96}" alt=""></div>
+                        {/block:Answerer}
+                            <div class="replies">{Replies}</div>
+                {/block:Answer}
 
-				{block:Date} 
-                    <div class="dateclass">
-                        <a href="{Permalink}">{DayOfMonthWithZero}-{MonthNumber}-{Year}</a>
+                {block:Date}
+             
+                <div style="width:inherit; margin-top:25px; padding-bottom:15px; padding-top:10px; height:25px; border-top:2px solid #D7D7D7">
+                    <div class="dateclass date" style="float:left;font-family:{font:Navigation}">
+                        <a href="{Permalink}">{ShortMonth}, {Year} {block:NoteCount}/ {NoteCount}<b> NOTES</b>{/block:NoteCount} </a>
+                        
                     </div>
-                    <hr>
+                    
+                    
+                 
+                   <div class="dateclass buttons" style="float:right;">
+                    <ul style="list-style-type:none;">
+                        <li>{ReblogButton size="15"}</li>
+                        <li>{LikeButton size="15"}</li>
+                    </ul>
+                </div> 
+                </div>
+                    
+                    
                 {/block:Date}
-<!-- 
 
-				{block:Answer}
-				<div class="answerclass">
-					<h2>{Question}</h2>
-					<p>{Answer}</p>
-					
-				</div>
-				{/block:Answer} -->
-
-				<!-- {block:Answer}
-				    <div class="question"><div class="asker">{Asker}</div><div class="asker-question">{Question}</div><img class="asker-avatar" src="{AskerPortraitURL-96}" alt=""></div>
-
-				    {block:Answerer}
-				        <div class="answer"><div class="answerer">{Answerer}</div><div class="answerer-answer">{Answer}</div><img class="answerer-avatar" src="{AnswererPortraitURL-96}" alt=""></div>
-				    {/block:Answerer}
-
-				    <div class="replies">
-				        {Replies}
-				    </div>
-				{/block:Answer} -->
-
-			</article>
-			{/block:Posts}
-		
-	</section>
+               <div class="notesclass"> {block:NoteCount}{PostNotes}{/block:NoteCount} </div>
+            
+            </div>
+            </article>
+            {/block:Posts}
+        
+    </section>
+    <!--</div>-->
+    <aside>
+    <div class="pagenumclass" style="text-align:center; padding:60px">
+    {block:Pagination}
+        {block:PreviousPage}
+            <a href="{PreviousPage}">Previous</a>
+        {/block:PreviousPage}
+        {block:JumpPagination length="7"}
+            {block:CurrentPage}
+                <span class="current_page page">{PageNumber}</span>
+            {/block:CurrentPage}
+            {block:JumpPage}
+                <a class="jump_page page" href="{URL}">{PageNumber}</a>
+            {/block:JumpPage}
+        {/block:JumpPagination}
+        {block:NextPage}
+            <a href="{NextPage}">Next</a>
+        {/block:NextPage}
+    {/block:Pagination}
+    </div>
+    </aside>
+    
+    <footer style="padding-top:35px">
+        <div class="footerclass" style="height:70px; background:{color:Footer Color}">
+        
+        <p>{CopyrightYears}</p>
+        <a href="/archive">Archive</a>
+            
+            
+        </div>
+    </footer>
 </body>
 </html>
 
